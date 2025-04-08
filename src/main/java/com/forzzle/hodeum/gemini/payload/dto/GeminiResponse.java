@@ -1,4 +1,4 @@
-package com.forzzle.hodeum.gemini.payload.response;
+package com.forzzle.hodeum.gemini.payload.dto;
 
 import java.util.List;
 

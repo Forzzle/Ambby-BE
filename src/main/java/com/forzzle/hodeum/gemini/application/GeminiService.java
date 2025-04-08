@@ -1,7 +1,7 @@
 package com.forzzle.hodeum.gemini.application;
 
-import com.forzzle.hodeum.gemini.payload.request.GeminiRequest;
-import com.forzzle.hodeum.gemini.payload.response.GeminiResponse;
+import com.forzzle.hodeum.gemini.payload.dto.GeminiRequest;
+import com.forzzle.hodeum.gemini.payload.dto.GeminiResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
