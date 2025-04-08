@@ -4,6 +4,7 @@ import com.forzzle.hodeum.gmap.application.GoogleMapClient;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview.Place;
 import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
+import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +45,12 @@ public class PlaceService {
         }
 
         return result;
+    }
+
+    public PlaceDetailResponse getPlaceDetail(String placeId) {
+
+        PlaceDetailResponse response = googleMapClient.getPlaceDetail(placeId);
+
+        return response;
     }
 }
