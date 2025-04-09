@@ -48,9 +48,6 @@ public class PlaceService {
     }
 
     public PlaceDetailResponse getPlaceDetail(String placeId) {
-
-        PlaceDetailResponse response = googleMapClient.getPlaceDetail(placeId);
-
-        return response;
+        return googleMapClient.getPlaceDetail(placeId);
     }
 }
