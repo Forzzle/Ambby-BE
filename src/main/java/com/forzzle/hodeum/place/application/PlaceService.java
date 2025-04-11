@@ -42,7 +42,8 @@ public class PlaceService {
                     place.id(),
                     place.displayName().text(),
                     address,
-                    place.primaryTypeDisplayName().text()
+                    place.primaryTypeDisplayName() != null ? place.primaryTypeDisplayName()
+                        .text() : null
                 )
             );
         }
