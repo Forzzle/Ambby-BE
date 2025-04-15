@@ -1,17 +1,17 @@
 package com.forzzle.hodeum.place.presentation;
 
 import com.forzzle.hodeum.common.payload.Response;
-import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
 import com.forzzle.hodeum.place.application.PlaceService;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
+import com.forzzle.hodeum.place.payload.response.PlacePreviewsResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,9 +28,10 @@ public class PlaceController {
             + "20개의 장소를 반환합니다."
     )
     public ResponseEntity<?> searchPlaces(
+        @RequestParam(required = false) String pageToken,
         @RequestBody String query
     ) {
-        List<PlacePreviewResponse> response = placeService.searchPlaces(query);
+        PlacePreviewsResponse response = placeService.searchPlaces(query, pageToken);
         return Response.ok("success search places", response);
     }
 

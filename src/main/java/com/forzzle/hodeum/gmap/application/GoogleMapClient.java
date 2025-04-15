@@ -25,18 +25,20 @@ public class GoogleMapClient {
             .build();
     }
 
-    public GooglePlacePreview searchPlaces(String query) {
+    public GooglePlacePreview searchPlaces(String query, String pageToken) {
         GooglePlaceTextQuery request = new GooglePlaceTextQuery(query);
 
         GooglePlacePreview response = placesClient.post()
             .uri(uriBuilder -> uriBuilder
                 .queryParam("languageCode", "ko")
+                .queryParam("pageSize", 5)
+                .queryParam("pageToken", pageToken)
                 .path("/v1/places:searchText")
                 .build())
             .header("Content-Type", "application/json")
             .header("X-Goog-Api-Key", apiKey)
             .header("X-Goog-FieldMask",
-                "places.id,places.displayName,places.priceLevel,places.primaryTypeDisplayName,places.location")
+                "places.id,places.displayName,places.priceLevel,places.primaryTypeDisplayName,places.location,nextPageToken")
             .bodyValue(request)
             .retrieve()
             .bodyToMono(GooglePlacePreview.class)

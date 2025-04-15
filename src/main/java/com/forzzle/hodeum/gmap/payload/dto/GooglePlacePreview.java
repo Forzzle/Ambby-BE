@@ -3,7 +3,8 @@ package com.forzzle.hodeum.gmap.payload.dto;
 import java.util.List;
 
 public record GooglePlacePreview(
-    List<Place> places
+    List<Place> places,
+    String nextPageToken
 ) {
 
     public record Place(

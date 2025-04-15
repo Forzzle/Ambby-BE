@@ -7,6 +7,7 @@ import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview.Place;
 import com.forzzle.hodeum.gmap.payload.dto.PlaceDetail;
 import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
+import com.forzzle.hodeum.place.payload.response.PlacePreviewsResponse;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +22,16 @@ public class PlaceService {
     private final GoogleMapClient googleMapClient;
     private final GeminiClient geminiClient;
 
-    public List<PlacePreviewResponse> searchPlaces(String query) {
+    public PlacePreviewsResponse searchPlaces(String query, String pageToken) {
 
-        GooglePlacePreview placePreviews = googleMapClient.searchPlaces(query);
+        GooglePlacePreview placePreviews = googleMapClient.searchPlaces(query, pageToken);
 
-        List<PlacePreviewResponse> response = makePlacePreviewResponses(placePreviews);
+        PlacePreviewsResponse response = makePlacePreviewResponses(placePreviews);
 
         return response;
     }
 
-    private List<PlacePreviewResponse> makePlacePreviewResponses(GooglePlacePreview response) {
+    private PlacePreviewsResponse makePlacePreviewResponses(GooglePlacePreview response) {
         List<Place> places = response.places();
         List<PlacePreviewResponse> result = new ArrayList<>();
         for (Place place : places) {
@@ -48,7 +49,7 @@ public class PlaceService {
             );
         }
 
-        return result;
+        return new PlacePreviewsResponse(result, response.nextPageToken());
     }
 
     public PlaceDetailResponse getPlaceDetail(String placeId) {
