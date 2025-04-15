@@ -25,7 +25,7 @@ public class PlaceController {
     @Operation(summary = "여행지 검색",
         description = "여행지를 검색합니다.<br>"
             + "검색어는 자유롭게 입력하여도 됩니다.<br>"
-            + "20개의 장소를 반환합니다."
+            + "5개의 장소를 반환하고, 다음 페이지를 조회하려면 pageToken을 넣어 요청합니다.<br>"
     )
     public ResponseEntity<?> searchPlaces(
         @RequestParam(required = false) String pageToken,
