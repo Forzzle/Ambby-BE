@@ -2,7 +2,7 @@ package com.forzzle.hodeum.gmap.payload.dto;
 
 import java.util.List;
 
-public record PlaceDetail(
+public record GoogleMapPlaceDetail(
     String id,
     String nationalPhoneNumber,
     String formattedAddress,
@@ -17,7 +17,8 @@ public record PlaceDetail(
     boolean allowsDogs,
     boolean restroom,
     PaymentOptions paymentOptions,
-    AccessibilityOptions accessibilityOptions
+    AccessibilityOptions accessibilityOptions,
+    Location location
 ) {
 
     public record RegularOpeningHours(
@@ -62,6 +63,13 @@ public record PlaceDetail(
         boolean wheelchairAccessibleParking,
         boolean wheelchairAccessibleEntrance,
         boolean wheelchairAccessibleSeating
+    ) {
+
+    }
+
+    public record Location(
+        double latitude,
+        double longitude
     ) {
 
     }

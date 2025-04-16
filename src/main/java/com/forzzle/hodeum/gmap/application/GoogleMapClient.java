@@ -1,9 +1,9 @@
 package com.forzzle.hodeum.gmap.application;
 
 import com.forzzle.hodeum.gmap.payload.dto.GeocodeAddress;
+import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlaceTextQuery;
-import com.forzzle.hodeum.gmap.payload.dto.PlaceDetail;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -65,9 +65,9 @@ public class GoogleMapClient {
         return result;
     }
 
-    public PlaceDetail getPlaceDetail(String placeId) {
-        String fields = "id,displayName,formattedAddress,regularOpeningHours,rating,userRatingCount,reviews.text,primaryTypeDisplayName,accessibilityOptions,paymentOptions,nationalPhoneNumber,restroom,editorialSummary,reservable,delivery,menuForChildren,allowsDogs";
-        PlaceDetail response = placesClient.get()
+    public GoogleMapPlaceDetail getPlaceDetail(String placeId) {
+        String fields = "id,displayName,formattedAddress,regularOpeningHours,rating,userRatingCount,reviews.text,primaryTypeDisplayName,accessibilityOptions,paymentOptions,nationalPhoneNumber,restroom,editorialSummary,reservable,delivery,menuForChildren,allowsDogs,location";
+        GoogleMapPlaceDetail response = placesClient.get()
             .uri(uriBuilder -> uriBuilder
                 .queryParam("languageCode", "ko")
                 .queryParam("key", apiKey)
@@ -75,7 +75,7 @@ public class GoogleMapClient {
                 .path("/v1/places/" + placeId)
                 .build())
             .retrieve()
-            .bodyToMono(PlaceDetail.class)
+            .bodyToMono(GoogleMapPlaceDetail.class)
             .block();
 
         return response;

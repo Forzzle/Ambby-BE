@@ -1,10 +1,12 @@
 package com.forzzle.hodeum.place.payload.response;
 
-import com.forzzle.hodeum.gmap.payload.dto.PlaceDetail;
+import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
+import com.forzzle.hodeum.tour.payload.TourPlaceDetail;
 
 public record PlaceDetailResponse(
-    PlaceDetail placeDetail,
-    String reviewSummary
+    GoogleMapPlaceDetail googleMapPlaceDetail,
+    String reviewSummary,
+    TourPlaceDetail tourPlaceDetail
 ) {
 
 }

@@ -2,12 +2,15 @@ package com.forzzle.hodeum.place.application;
 
 import com.forzzle.hodeum.gemini.application.GeminiClient;
 import com.forzzle.hodeum.gmap.application.GoogleMapClient;
+import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview.Place;
-import com.forzzle.hodeum.gmap.payload.dto.PlaceDetail;
 import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
 import com.forzzle.hodeum.place.payload.response.PlacePreviewsResponse;
+import com.forzzle.hodeum.tour.application.TourClient;
+import com.forzzle.hodeum.tour.payload.TourPlaceDetail;
+import com.forzzle.hodeum.tour.payload.TourPlacePreiew;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ public class PlaceService {
 
     private final GoogleMapClient googleMapClient;
     private final GeminiClient geminiClient;
+    private final TourClient tourClient;
 
     public PlacePreviewsResponse searchPlaces(String query, String pageToken) {
 
@@ -53,9 +57,16 @@ public class PlaceService {
     }
 
     public PlaceDetailResponse getPlaceDetail(String placeId) {
-        PlaceDetail placeDetail = googleMapClient.getPlaceDetail(placeId);
-        String summary = geminiClient.getSummary(placeDetail.reviews());
+        GoogleMapPlaceDetail googleMapPlaceDetail = googleMapClient.getPlaceDetail(placeId);
+        String summary = geminiClient.getSummary(googleMapPlaceDetail.reviews());
+        TourPlacePreiew tourPlacePreview = tourClient.getPlaceIdWithLocation(
+            googleMapPlaceDetail.location());
 
-        return new PlaceDetailResponse(placeDetail, summary);
+        if (tourPlacePreview.isEmpty()) {
+            return new PlaceDetailResponse(googleMapPlaceDetail, summary, null);
+        }
+        TourPlaceDetail tourPlaceDetail = tourClient.getPlaceDetail(
+            tourPlacePreview.getContentId());
+        return new PlaceDetailResponse(googleMapPlaceDetail, summary, tourPlaceDetail);
     }
 }

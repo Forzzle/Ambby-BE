@@ -2,7 +2,7 @@ package com.forzzle.hodeum.gemini.application;
 
 import com.forzzle.hodeum.gemini.payload.dto.GeminiRequest;
 import com.forzzle.hodeum.gemini.payload.dto.GeminiResponse;
-import com.forzzle.hodeum.gmap.payload.dto.PlaceDetail.Review;
+import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail.Review;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
