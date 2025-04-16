@@ -53,4 +53,20 @@ public class GeminiClient {
         }
         return askGemini(prompt.toString());
     }
+
+    public String[] getSoundList(String placeName) {
+        StringBuilder prompt = new StringBuilder("주어진 장소를 보고, 사운드 리스트에서 가장 적합한 사운드들을 추천해줘.\n"
+            + "이때, 다음 조건을 지켜줘.\n"
+            + "1. 출력은 *메타문장을 제거*하고, \',\'로 구분된(공백 및 개행 제거) 사운드 리스트를 반환해줘. 예) beach,wind"
+            + "2. 최소 1개에서 최대 3개의 사운드를 추천해줘.\n"
+            + "사운드 리스트는 다음과 같아."
+            + "[crowd,beach,wind,eat,footstep]\n"
+            + "장소는" + placeName + "이야.");
+        String answer = askGemini(prompt.toString());
+
+        //문장 마지막 개행 제거
+        String preProcessed = answer.replace("\n", "");
+        String[] soundList = preProcessed.split(",");
+        return soundList;
+    }
 }

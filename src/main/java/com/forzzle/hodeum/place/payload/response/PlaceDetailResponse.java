@@ -6,6 +6,7 @@ import com.forzzle.hodeum.tour.payload.TourPlaceDetail;
 public record PlaceDetailResponse(
     GoogleMapPlaceDetail googleMapPlaceDetail,
     String reviewSummary,
+    String[] soundList,
     TourPlaceDetail tourPlaceDetail
 ) {
 

@@ -59,14 +59,15 @@ public class PlaceService {
     public PlaceDetailResponse getPlaceDetail(String placeId) {
         GoogleMapPlaceDetail googleMapPlaceDetail = googleMapClient.getPlaceDetail(placeId);
         String summary = geminiClient.getSummary(googleMapPlaceDetail.reviews());
+        String[] soundList = geminiClient.getSoundList(googleMapPlaceDetail.displayName().text());
         TourPlacePreiew tourPlacePreview = tourClient.getPlaceIdWithLocation(
             googleMapPlaceDetail.location());
 
         if (tourPlacePreview.isEmpty()) {
-            return new PlaceDetailResponse(googleMapPlaceDetail, summary, null);
+            return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, null);
         }
         TourPlaceDetail tourPlaceDetail = tourClient.getPlaceDetail(
             tourPlacePreview.getContentId());
-        return new PlaceDetailResponse(googleMapPlaceDetail, summary, tourPlaceDetail);
+        return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, tourPlaceDetail);
     }
 }
