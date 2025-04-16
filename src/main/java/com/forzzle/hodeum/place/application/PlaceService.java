@@ -6,6 +6,7 @@ import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview.Place;
 import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
+import com.forzzle.hodeum.place.payload.request.HumanTrafficRequest;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
 import com.forzzle.hodeum.place.payload.response.PlacePreviewsResponse;
 import com.forzzle.hodeum.tour.application.TourClient;
@@ -69,5 +70,11 @@ public class PlaceService {
         TourPlaceDetail tourPlaceDetail = tourClient.getPlaceDetail(
             tourPlacePreview.getContentId());
         return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, tourPlaceDetail);
+    }
+
+    public String getHumanTraffic(HumanTrafficRequest request) {
+        List<String> places = request.places();
+        String response = geminiClient.getHumanTraffic(places);
+        return response;
     }
 }

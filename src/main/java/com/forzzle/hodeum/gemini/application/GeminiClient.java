@@ -69,4 +69,15 @@ public class GeminiClient {
         String[] soundList = preProcessed.split(",");
         return soundList;
     }
+
+    public String getHumanTraffic(List<String> places) {
+        StringBuilder prompt = new StringBuilder("다음 장소들의 최적화된 동선을 만들어줘 이때, 다음 조건을 지켜줘.\n "
+            + "1.정보제공에 있어서 불필요한 메타문장은 제거\n"
+            + "2.**장소의 이름만**을 개행을 사용해 나열\n"
+            + "동선이 궁금한 장소들은 다음과 같아.");
+        for (String place : places) {
+            prompt.append(place).append("\n");
+        }
+        return askGemini(prompt.toString());
+    }
 }

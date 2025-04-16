@@ -2,6 +2,7 @@ package com.forzzle.hodeum.place.presentation;
 
 import com.forzzle.hodeum.common.payload.Response;
 import com.forzzle.hodeum.place.application.PlaceService;
+import com.forzzle.hodeum.place.payload.request.HumanTrafficRequest;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
 import com.forzzle.hodeum.place.payload.response.PlacePreviewsResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,6 +45,19 @@ public class PlaceController {
     ) {
         PlaceDetailResponse response = placeService.getPlaceDetail(placeId);
         return Response.ok("success get detail of place.", response);
+    }
+
+    @PostMapping(value = "/human-traffic")
+    @Operation(summary = "동선 생성",
+        description = "여행지 리스트를 받아 최적화된 동선을 제공합니다.<br>"
+            + "여행지 리스트는 주소 + 장소 이름으로 주어져야 합니다.<br>"
+            + "ex) [\"부산광역시 남구 용소로 45 부경대학교\", \"부산광역시 부산진구 전포동 산50-25 황령산\"]<br>"
+    )
+    public ResponseEntity<?> getHumanTraffic(
+        @RequestBody HumanTrafficRequest request
+    ) {
+        String response = placeService.getHumanTraffic(request);
+        return Response.ok("success get human traffic of places.", response);
     }
 
 }
