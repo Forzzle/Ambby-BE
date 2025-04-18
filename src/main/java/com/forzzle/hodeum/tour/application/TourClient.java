@@ -40,7 +40,7 @@ public class TourClient {
                 + "&MobileApp=HODEUM"
                 + "&mapX=" + location.longitude()
                 + "&mapY=" + location.latitude()
-                + "&radius=1000"
+                + "&radius=350"
                 + "&_type=JSON"
                 + "&serviceKey=" + apiKey;
         URI uri = URI.create(uriString);
