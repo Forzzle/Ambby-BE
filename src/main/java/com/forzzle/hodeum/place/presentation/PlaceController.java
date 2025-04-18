@@ -1,6 +1,7 @@
 package com.forzzle.hodeum.place.presentation;
 
 import com.forzzle.hodeum.common.payload.Response;
+import com.forzzle.hodeum.gemini.payload.dto.HumanTraffic;
 import com.forzzle.hodeum.place.application.PlaceService;
 import com.forzzle.hodeum.place.payload.request.HumanTrafficRequest;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
@@ -56,7 +57,7 @@ public class PlaceController {
     public ResponseEntity<?> getHumanTraffic(
         @RequestBody HumanTrafficRequest request
     ) {
-        String response = placeService.getHumanTraffic(request);
+        HumanTraffic response = placeService.getHumanTraffic(request);
         return Response.ok("success get human traffic of places.", response);
     }
 

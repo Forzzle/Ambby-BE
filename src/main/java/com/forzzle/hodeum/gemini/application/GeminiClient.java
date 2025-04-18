@@ -1,7 +1,10 @@
 package com.forzzle.hodeum.gemini.application;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.forzzle.hodeum.gemini.payload.dto.GeminiRequest;
 import com.forzzle.hodeum.gemini.payload.dto.GeminiResponse;
+import com.forzzle.hodeum.gemini.payload.dto.HumanTraffic;
 import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail.Review;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,14 +73,35 @@ public class GeminiClient {
         return soundList;
     }
 
-    public String getHumanTraffic(List<String> places) {
-        StringBuilder prompt = new StringBuilder("다음 장소들의 최적화된 동선을 만들어줘 이때, 다음 조건을 지켜줘.\n "
-            + "1.정보제공에 있어서 불필요한 메타문장은 제거\n"
-            + "2.**장소의 이름만**을 개행을 사용해 나열\n"
-            + "동선이 궁금한 장소들은 다음과 같아.");
+    public HumanTraffic getHumanTraffic(List<String> places) {
+        StringBuilder prompt = new StringBuilder("""
+            내일 하루 동안 아래 장소들로 진짜 여행간다고 생각하고 최적화된 동선 짜서 알려줘.
+            음식점 같은 경우는 아침, 점심, 저녁에 먹을거니까 잘 배치 해주고 디저트나 액티비티 같은 경우도 알아서 잘 센스있게 배치해줘.
+            그리고 이때 음식점이랑 장소가 비슷하다 해서 **묶지 말고 정확히** 제시해줘.
+            
+            **쓸데없는 문장은 빼고** 다음과 같은 **JSON형식을 꼭 지켜서** 대답해줘.
+            **humanTraffic에 음식점같은 가게도 꼭 포함시켜**
+            {
+              "summary" : "동선 결정 근거 요약",
+              "humanTraffic" : ["장소 또는 가게1", "장소 또는 가게2"]
+            }
+            
+            [장소 리스트]
+            """);
         for (String place : places) {
             prompt.append(place).append("\n");
         }
-        return askGemini(prompt.toString());
+        String answer = askGemini(prompt.toString());
+        String cleaned = answer.replaceAll("^```json\\s*", "")  // 앞의 ```json 및 개행 제거
+            .replaceAll("\\s*```$", "");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        HumanTraffic humanTraffic;
+        try {
+            humanTraffic = objectMapper.readValue(cleaned, HumanTraffic.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("JSON parsing error: " + cleaned, e);
+        }
+        return humanTraffic;
     }
 }

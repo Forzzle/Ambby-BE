@@ -1,6 +1,7 @@
 package com.forzzle.hodeum.place.application;
 
 import com.forzzle.hodeum.gemini.application.GeminiClient;
+import com.forzzle.hodeum.gemini.payload.dto.HumanTraffic;
 import com.forzzle.hodeum.gmap.application.GoogleMapClient;
 import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
@@ -72,9 +73,9 @@ public class PlaceService {
         return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, tourPlaceDetail);
     }
 
-    public String getHumanTraffic(HumanTrafficRequest request) {
+    public HumanTraffic getHumanTraffic(HumanTrafficRequest request) {
         List<String> places = request.places();
-        String response = geminiClient.getHumanTraffic(places);
+        HumanTraffic response = geminiClient.getHumanTraffic(places);
         return response;
     }
 }
