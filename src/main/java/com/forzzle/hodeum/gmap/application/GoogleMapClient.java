@@ -66,7 +66,7 @@ public class GoogleMapClient {
     }
 
     public GoogleMapPlaceDetail getPlaceDetail(String placeId) {
-        String fields = "id,displayName,formattedAddress,regularOpeningHours,rating,userRatingCount,reviews.text,primaryTypeDisplayName,accessibilityOptions,paymentOptions,nationalPhoneNumber,restroom,editorialSummary,reservable,delivery,menuForChildren,allowsDogs,location";
+        String fields = "id,displayName,formattedAddress,regularOpeningHours,rating,userRatingCount,reviews.text,primaryTypeDisplayName,accessibilityOptions,nationalPhoneNumber,allowsDogs,location";
         GoogleMapPlaceDetail response = placesClient.get()
             .uri(uriBuilder -> uriBuilder
                 .queryParam("languageCode", "ko")

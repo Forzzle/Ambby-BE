@@ -11,12 +11,8 @@ public record GoogleMapPlaceDetail(
     int userRatingCount,
     DisplayName displayName,
     PrimaryTypeDisplayName primaryTypeDisplayName,
-    boolean reservable,
     List<Review> reviews,
-    boolean menuForChildren,
     boolean allowsDogs,
-    boolean restroom,
-    PaymentOptions paymentOptions,
     AccessibilityOptions accessibilityOptions,
     Location location
 ) {
@@ -52,17 +48,11 @@ public record GoogleMapPlaceDetail(
         }
     }
 
-    public record PaymentOptions(
-        boolean acceptsCreditCards,
-        boolean acceptsCashOnly
-    ) {
-
-    }
-
     public record AccessibilityOptions(
         boolean wheelchairAccessibleParking,
         boolean wheelchairAccessibleEntrance,
-        boolean wheelchairAccessibleSeating
+        boolean wheelchairAccessibleSeating,
+        boolean wheelchairAccessibleRestroom
     ) {
 
     }

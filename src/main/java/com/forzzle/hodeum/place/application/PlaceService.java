@@ -7,6 +7,7 @@ import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview.Place;
 import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
+import com.forzzle.hodeum.place.payload.dto.ToggleDetail;
 import com.forzzle.hodeum.place.payload.request.HumanTrafficRequest;
 import com.forzzle.hodeum.place.payload.response.PlaceDetailResponse;
 import com.forzzle.hodeum.place.payload.response.PlacePreviewsResponse;
@@ -70,7 +71,8 @@ public class PlaceService {
         }
         TourPlaceDetail tourPlaceDetail = tourClient.getPlaceDetail(
             tourPlacePreview.getContentId());
-        return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, tourPlaceDetail);
+        ToggleDetail toggleDetail = ToggleDetail.of(googleMapPlaceDetail, tourPlaceDetail);
+        return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, toggleDetail);
     }
 
     public HumanTraffic getHumanTraffic(HumanTrafficRequest request) {
