@@ -1,5 +1,7 @@
 package com.forzzle.hodeum.tour.payload;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.forzzle.hodeum.tour.util.ItemsDeserializer;
 import java.util.List;
 
 public record TourPlacePreiew(Response response) {
@@ -8,6 +10,7 @@ public record TourPlacePreiew(Response response) {
 
         public record Body(Items items, int numOfRows, int pageNo, int totalCount) {
 
+            @JsonDeserialize(using = ItemsDeserializer.class)
             public record Items(List<Item> item) {
 
                 public record Item(String contentid, String title) {
