@@ -6,9 +6,12 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+import com.forzzle.hodeum.tour.payload.TourPlacePreiew;
 import com.forzzle.hodeum.tour.payload.TourPlacePreiew.Response.Body.Items;
+import com.forzzle.hodeum.tour.payload.TourPlacePreiew.Response.Body.Items.Item;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 public class ItemsDeserializer extends JsonDeserializer<Items> {
 
@@ -21,8 +24,21 @@ public class ItemsDeserializer extends JsonDeserializer<Items> {
             return new Items(Collections.emptyList());
         }
 
-        // 일반적인 경우는 Jackson으로 delegate
+        // 정상적인 케이스: item 필드에서 직접 꺼내기
+        JsonNode itemNode = node.get("item");
         ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        return mapper.treeToValue(node, Items.class);
+
+        List<Item> items = Collections.emptyList();
+        if (itemNode != null) {
+            if (itemNode.isArray()) {
+                items = mapper.readerForListOf(Item.class).readValue(itemNode);
+            } else {
+                // 단일 객체가 올 수도 있음
+                Item singleItem = mapper.treeToValue(itemNode, Item.class);
+                items = List.of(singleItem);
+            }
+        }
+
+        return new Items(items);
     }
 }
