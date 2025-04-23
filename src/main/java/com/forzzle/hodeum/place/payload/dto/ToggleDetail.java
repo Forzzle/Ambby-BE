@@ -1,6 +1,7 @@
 package com.forzzle.hodeum.place.payload.dto;
 
 import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
+import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail.AccessibilityOptions;
 import com.forzzle.hodeum.tour.payload.TourPlaceDetail;
 import com.forzzle.hodeum.tour.payload.TourPlaceDetail.Response.Body.Items.Item;
 
@@ -64,6 +65,18 @@ public record ToggleDetail(
     public static ToggleDetail of(GoogleMapPlaceDetail google, TourPlaceDetail tourPlaceDetail) {
         Item tour = tourPlaceDetail.response().body().items().item().get(0);
 
+        AccessibilityOptions accessibilityOptions = google.accessibilityOptions();
+        boolean wheelchairAccessibleParking = false;
+        boolean wheelchairAccessibleEntrance = false;
+        boolean wheelchairAccessibleSeating = false;
+        boolean wheelchairAccessibleRestroom = false;
+        if (accessibilityOptions != null) {
+            wheelchairAccessibleParking = accessibilityOptions.wheelchairAccessibleParking();
+            wheelchairAccessibleEntrance = accessibilityOptions.wheelchairAccessibleEntrance();
+            wheelchairAccessibleSeating = accessibilityOptions.wheelchairAccessibleSeating();
+            wheelchairAccessibleRestroom = accessibilityOptions.wheelchairAccessibleRestroom();
+        }
+
         return new ToggleDetail(
             new Common(
                 tour.parking(),
@@ -93,10 +106,10 @@ public record ToggleDetail(
                 tour.elevator(),
                 tour.restroom(),
                 tour.handicapetc(),
-                google.accessibilityOptions().wheelchairAccessibleParking(),
-                google.accessibilityOptions().wheelchairAccessibleEntrance(),
-                google.accessibilityOptions().wheelchairAccessibleSeating(),
-                google.accessibilityOptions().wheelchairAccessibleRestroom()
+                wheelchairAccessibleParking,
+                wheelchairAccessibleEntrance,
+                wheelchairAccessibleSeating,
+                wheelchairAccessibleRestroom
             ),
             new Deaf(
                 tour.signguide(),
