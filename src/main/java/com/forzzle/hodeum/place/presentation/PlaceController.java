@@ -39,7 +39,9 @@ public class PlaceController {
 
     @PostMapping(value = "/detail/{placeId}")
     @Operation(summary = "여행지 상세정보",
-        description = "여행지의 상세정보를 조회합니다."
+        description = "여행지의 상세정보를 조회합니다.<br>"
+            + "리뷰 데이터는 최대 5개를 가져옵니다."
+            + "사진 데이터는 최대 10개를 가져옵니다."
     )
     public ResponseEntity<?> getPlaceDetail(
         @PathVariable String placeId
