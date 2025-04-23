@@ -12,6 +12,7 @@ public record GoogleMapPlaceDetail(
     DisplayName displayName,
     PrimaryTypeDisplayName primaryTypeDisplayName,
     List<Review> reviews,
+    List<Photo> photos,
     boolean allowsDogs,
     AccessibilityOptions accessibilityOptions,
     Location location
@@ -43,6 +44,18 @@ public record GoogleMapPlaceDetail(
         public record ReviewText(
             String text,
             String languageCode
+        ) {
+
+        }
+    }
+
+    public record Photo(
+        List<AuthorAttribution> authorAttributions,
+        String googleMapsUri
+    ) {
+
+        public record AuthorAttribution(
+            String photoUri
         ) {
 
         }
