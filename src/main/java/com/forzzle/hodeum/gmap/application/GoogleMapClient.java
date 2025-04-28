@@ -2,9 +2,13 @@ package com.forzzle.hodeum.gmap.application;
 
 import com.forzzle.hodeum.gmap.payload.dto.GeocodeAddress;
 import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
+import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail.Photo;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlaceTextQuery;
+import com.forzzle.hodeum.place.payload.dto.PhotoURI;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -79,5 +83,24 @@ public class GoogleMapClient {
             .block();
 
         return response;
+    }
+
+    public List<String> getPlacePhotos(List<Photo> photos) {
+        List<String> uris = new ArrayList<>();
+        for (Photo photo : photos) {
+            PhotoURI response = placesClient.get()
+                .uri(uriBuilder -> uriBuilder
+                    .queryParam("key", apiKey)
+                    .queryParam("maxHeightPx", photo.heightPx())
+                    .queryParam("maxWidthPx", photo.widthPx())
+                    .queryParam("skipHttpRedirect", true)
+                    .path("/v1/" + photo.name() + "/media")
+                    .build())
+                .retrieve()
+                .bodyToMono(PhotoURI.class)
+                .block();
+            uris.add(response.photoUri());
+        }
+        return uris;
     }
 }

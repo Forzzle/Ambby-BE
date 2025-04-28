@@ -50,15 +50,18 @@ public record GoogleMapPlaceDetail(
     }
 
     public record Photo(
-        List<AuthorAttribution> authorAttributions,
-        String googleMapsUri
+        String name,
+        String widthPx,
+        String heightPx,
+        List<AuthorAttributions> authorAttributions
     ) {
 
-        public record AuthorAttribution(
-            String photoUri
+        public record AuthorAttributions(
+            String displayName
         ) {
 
         }
+
     }
 
     public record AccessibilityOptions(

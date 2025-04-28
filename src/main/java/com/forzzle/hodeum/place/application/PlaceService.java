@@ -6,6 +6,7 @@ import com.forzzle.hodeum.gmap.application.GoogleMapClient;
 import com.forzzle.hodeum.gmap.payload.dto.GoogleMapPlaceDetail;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview;
 import com.forzzle.hodeum.gmap.payload.dto.GooglePlacePreview.Place;
+import com.forzzle.hodeum.gmap.payload.response.GoogleMapPlaceDetailView;
 import com.forzzle.hodeum.gmap.payload.response.PlacePreviewResponse;
 import com.forzzle.hodeum.place.payload.dto.ToggleDetail;
 import com.forzzle.hodeum.place.payload.request.HumanTrafficRequest;
@@ -61,18 +62,20 @@ public class PlaceService {
 
     public PlaceDetailResponse getPlaceDetail(String placeId) {
         GoogleMapPlaceDetail googleMapPlaceDetail = googleMapClient.getPlaceDetail(placeId);
+        List<String> photoUris = googleMapClient.getPlacePhotos(googleMapPlaceDetail.photos());
         String summary = geminiClient.getSummary(googleMapPlaceDetail.reviews());
         String[] soundList = geminiClient.getSoundList(googleMapPlaceDetail.displayName().text());
         TourPlacePreiew tourPlacePreview = tourClient.getPlaceIdWithLocation(
             googleMapPlaceDetail.location());
 
+        GoogleMapPlaceDetailView googleView = GoogleMapPlaceDetailView.of(googleMapPlaceDetail);
         if (tourPlacePreview.isEmpty()) {
-            return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, null);
+            return new PlaceDetailResponse(googleView, summary, soundList, null, photoUris);
         }
         TourPlaceDetail tourPlaceDetail = tourClient.getPlaceDetail(
             tourPlacePreview.getContentId());
         ToggleDetail toggleDetail = ToggleDetail.of(googleMapPlaceDetail, tourPlaceDetail);
-        return new PlaceDetailResponse(googleMapPlaceDetail, summary, soundList, toggleDetail);
+        return new PlaceDetailResponse(googleView, summary, soundList, toggleDetail, photoUris);
     }
 
     public HumanTraffic getHumanTraffic(HumanTrafficRequest request) {
