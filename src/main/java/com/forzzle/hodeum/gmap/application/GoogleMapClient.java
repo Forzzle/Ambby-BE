@@ -100,6 +100,8 @@ public class GoogleMapClient {
                 .bodyToMono(PhotoURI.class)
                 .block();
             uris.add(response.photoUri());
+
+            break;
         }
         return uris;
     }
