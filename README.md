@@ -28,7 +28,7 @@ We provide review summaries, audio guides and disability information to help vis
 ## 4. Flow Chart
 ![image](https://github.com/user-attachments/assets/c0870ae0-b28a-4b52-b06a-e3dec94b74c1)
 
-## 4. Features
+## 5. Features
 
 ### [Easy-to-Understand Info]
 - Provides information to help visually impaired individuals understand tourist attractions more effectively.
