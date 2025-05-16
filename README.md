@@ -1,4 +1,6 @@
-# ✈️Bridging Travel Info Gaps for the Visually Impaired, Amby🍀
+<h1>🍀Amby </h1>
+
+### ✈️ Bridging Travel Info Gaps for the Visually Impaired.
 
 ## 1. Project Introduction
 ### What's the Problem?
