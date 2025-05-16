@@ -1,13 +1,13 @@
 # ✈️Bridging Travel Info Gaps for the Visually Impaired, Amby🍀
 
-## Project Introduction
+## 1. Project Introduction
 ### What's the Problem?
 Travel information is plentiful, but it is often too “big” and “visually centric” for people with visual impairments.
 
 ### What’s the Goal?
 We provide review summaries, audio guides and disability information to help visually impaired people plan their own trips and reduce barriers to accessing information easily.
 
-## 1. Development Environment
+## 2. Development Environment
 - Front : React-Native
 - Back-end : Java, Spring Boot
 - API : Gemini, Google Maps, Tour API
@@ -15,20 +15,20 @@ We provide review summaries, audio guides and disability information to help vis
 - Deploy : Compute Engine(GCP)
 - Design : Figma
 
-## 2. Development Timeline
+## 3. Development Timeline
 - Overall Development Period: 2025-04-01 ~ 2025-05-15
 - Idea Selection & Planning: 2025-04-01 ~ 2025-04-15
 - Feature Implementation: 2025-04-15 ~ 2025-05-15
 
-## 3. Arcitecture
+## 4. Arcitecture
 ![image](https://github.com/user-attachments/assets/86dbb413-bdbc-4409-90c4-b966f533d275)
 
 
 
-## 4. Flow Chart
+## 5. Flow Chart
 ![image](https://github.com/user-attachments/assets/c0870ae0-b28a-4b52-b06a-e3dec94b74c1)
 
-## 5. Features
+## 6. Features
 
 ### [Easy-to-Understand Info]
 - Provides information to help visually impaired individuals understand tourist attractions more effectively.
