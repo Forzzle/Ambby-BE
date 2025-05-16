@@ -1,8 +1,8 @@
-<h1>🍀Amby </h1>
-
-### ✈️ Bridging Travel Info Gaps for the Visually Impaired.
+# 🍀Amby
 
 ## 1. Project Introduction
+### ✈️ Bridging Travel Info Gaps for the Visually Impaired.
+
 ### What's the Problem?
 Travel information is plentiful, but it is often too “big” and “visually centric” for people with visual impairments.
 
