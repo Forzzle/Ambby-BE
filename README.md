@@ -1,4 +1,4 @@
-### 시각장애인들의 여행 정보격차 해소를 위한 서비스, Amby
+### A service aimed at closing the travel information gap for visually impaired individuals, Amby
 
 ## Project Introduction
 ### What's the Problem?
@@ -15,10 +15,10 @@ We provide review summaries, audio guides and disability information to help vis
 - Deploy : Compute Engine(GCP)
 - Design : Figma
 
-## 2. 개발 기간
-- 전체 개발 기간 : 2025-04-01 ~ 2025-05-15
-- 아이디어 선정 및 기획 : 2025-04-01 ~ 2025-04-15
-- 기능 구현 : 2025-04-15 ~ 2025-05-15
+## 2. Development Timeline
+- Overall Development Period: 2025-04-01 ~ 2025-05-15
+- Idea Selection & Planning: 2025-04-01 ~ 2025-04-15
+- Feature Implementation: 2025-04-15 ~ 2025-05-15
 
 ## 3. Arcitecture
 ![image](https://github.com/user-attachments/assets/86dbb413-bdbc-4409-90c4-b966f533d275)
@@ -28,11 +28,11 @@ We provide review summaries, audio guides and disability information to help vis
 ## 4. Flow Chart
 ![image](https://github.com/user-attachments/assets/c0870ae0-b28a-4b52-b06a-e3dec94b74c1)
 
-## 4. 기능
+## 4. Features
 
 ### [Easy-to-Understand Info]
-- 시각장애인들이 보다 효율적으로 관광지를 이해할 수 있도록 정보를 제공합니다.
-- Gemini, Google Maps, Tour API로 구현되었습니다.
+- Provides information to help visually impaired individuals understand tourist attractions more effectively.
+- Implemented using Gemini, Google Maps, and a Tour API.
 
 | Easy-to-Understand Info |
 |----------|
