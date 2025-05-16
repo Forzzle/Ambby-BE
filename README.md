@@ -30,3 +30,35 @@ We provide review summaries, audio guides and disability information to help vis
 
 ## 4. 기능
 
+### [Easy-to-Understand Info]
+- 시각장애인들이 보다 효율적으로 관광지를 이해할 수 있도록 정보를 제공합니다.
+- Gemini, Google Maps, Tour API로 구현되었습니다.
+
+| Easy-to-Understand Info |
+|----------|
+|<img src="https://github.com/user-attachments/assets/8e6e58ca-1a51-4293-a384-b451457459ae">|
+
+<br>
+
+### [Route Planner]
+- We provide automatically generated, efficient travel routes for visually impaired users who cannot read maps.
+- The routes are optimized by considering not only location and travel distance but also mealtimes.
+- Implemented using Gemini.
+
+| Route Planner |
+|----------|
+|<img src="https://github.com/user-attachments/assets/faf72b89-2da8-453e-b29c-384944e7da5a">|
+
+<br>
+
+### [Other Features]
+- In addition, we added features such as bookmarks and visual mode settings to enhance user convenience.
+- Expecially, we redesigned the UI for visually impaired users by adjusting button size and layout, and proposed three high-contrast color themes based on WCAG guidelines to support various types of color blindness and low vision.
+
+| Other Features |
+|----------|
+|<img src="https://github.com/user-attachments/assets/e4983a4d-88f6-495c-b84d-72a90c672177">|
+
+
+<br>
+
