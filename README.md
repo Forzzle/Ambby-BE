@@ -1,4 +1,4 @@
-# 🍀Amby
+# 🍀Ambby
 
 ## 1. Project Introduction
 ### ✈️ Bridging Travel Info Gaps for the Visually Impaired.
