@@ -1,4 +1,4 @@
-### A service aimed at closing the travel information gap for visually impaired individuals, Amby
+# ✈️Bridging Travel Info Gaps for the Visually Impaired, Amby🍀
 
 ## Project Introduction
 ### What's the Problem?
